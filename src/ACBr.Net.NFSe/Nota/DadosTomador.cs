@@ -39,6 +39,7 @@ namespace ACBr.Net.NFSe.Nota
         #region Events
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public int MyProperty { get; set; }
 
         #endregion Events
 
