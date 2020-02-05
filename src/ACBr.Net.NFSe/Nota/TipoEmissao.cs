@@ -31,9 +31,9 @@
 
 namespace ACBr.Net.NFSe.Nota
 {
-	public enum TipoEmissao
-	{
-		NormalNFSe,
-		ContigenciaNFSe
-	}
+    public enum TipoEmissao
+    {
+        NormalNFSe,
+        ContigenciaNFSe
+    }
 }

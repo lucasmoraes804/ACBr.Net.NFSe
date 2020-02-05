@@ -31,14 +31,14 @@
 
 namespace ACBr.Net.NFSe.Nota
 {
-	public enum TipoDeducao
-	{
-		Nenhum,
-		Materiais,
-		SubEmpreitada,
-		Mercadorias,
-		VeiculacaoeDivulgacao,
-		MapadeConstCivil,
-		Servicos
-	}
+    public enum TipoDeducao
+    {
+        Nenhum,
+        Materiais,
+        SubEmpreitada,
+        Mercadorias,
+        VeiculacaoeDivulgacao,
+        MapadeConstCivil,
+        Servicos
+    }
 }

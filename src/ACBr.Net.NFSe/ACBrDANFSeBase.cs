@@ -29,11 +29,26 @@
 // <summary></summary>
 // ***********************************************************************
 
+
+/* Alteração não mesclada do projeto 'ACBr.Net.NFSe (netstandard2.0)'
+Antes:
 using System;
 using System.ComponentModel;
 using ACBr.Net.Core;
-using ACBr.Net.Core.Logging;
+Após:
+using ACBr.Net.Core;
+*/
+using ACBr.Net.Core;
 using ACBr.Net.DFe.Core.Common;
+using System.ComponentModel;
+/* Alteração não mesclada do projeto 'ACBr.Net.NFSe (netstandard2.0)'
+Antes:
+using System.ComponentModel;
+Após:
+using System.ComponentModel;
+using System.ComponentModel;
+*/
+
 
 #if !NETSTANDARD2_0
 

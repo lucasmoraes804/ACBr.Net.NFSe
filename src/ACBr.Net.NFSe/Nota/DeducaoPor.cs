@@ -31,10 +31,10 @@
 
 namespace ACBr.Net.NFSe.Nota
 {
-	public enum DeducaoPor
-	{
-		Nenhum,
-		Percentual,
-		Valor
-	}
+    public enum DeducaoPor
+    {
+        Nenhum,
+        Percentual,
+        Valor
+    }
 }

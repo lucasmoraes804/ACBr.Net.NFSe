@@ -29,8 +29,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-
 namespace ACBr.Net.NFSe.Providers
 {
     public interface IABRASF2Client : IServiceClient

@@ -31,14 +31,14 @@
 
 namespace ACBr.Net.NFSe.Nota
 {
-	public enum ExigibilidadeIss
-	{
-		Exigivel,
-		NaoIncidencia,
-		Isencao,
-		Exportacao,
-		Imunidade,
-		SuspensaDecisaoJudicial,
-		SuspensaProcessoAdministrativo
-	}
+    public enum ExigibilidadeIss
+    {
+        Exigivel,
+        NaoIncidencia,
+        Isencao,
+        Exportacao,
+        Imunidade,
+        SuspensaDecisaoJudicial,
+        SuspensaProcessoAdministrativo
+    }
 }

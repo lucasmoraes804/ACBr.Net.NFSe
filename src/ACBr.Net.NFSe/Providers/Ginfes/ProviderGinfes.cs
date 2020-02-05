@@ -29,18 +29,32 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.Core;
+using ACBr.Net.Core.Extensions;
+using ACBr.Net.DFe.Core;
+using ACBr.Net.DFe.Core.Serializer;
+using ACBr.Net.NFSe.Configuracao;
+using ACBr.Net.NFSe.Nota;
 using System;
+using System;
+using System.Linq;
 using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using ACBr.Net.Core;
-using ACBr.Net.Core.Extensions;
-using ACBr.Net.DFe.Core;
-using ACBr.Net.DFe.Core.Common;
-using ACBr.Net.DFe.Core.Serializer;
-using ACBr.Net.NFSe.Configuracao;
-using ACBr.Net.NFSe.Nota;
+/* Alteração não mesclada do projeto 'ACBr.Net.NFSe (netstandard2.0)'
+Antes:
+using System;
+using System.Linq;
+using System.Text;
+using System.Xml;
+Após:
+using System.Text;
+using System.Xml;
+using System.Xml;
+using System.Xml.Linq;
+*/
+
 
 namespace ACBr.Net.NFSe.Providers
 {
@@ -633,7 +647,9 @@ namespace ACBr.Net.NFSe.Providers
             {
                 var xmlRps = GetXmlRps(nota, false, false, true);
                 xmlLoteRps.Append(xmlRps);
-                GravarRpsEmDisco(xmlRps, $"Rps-{nota.IdentificacaoRps.DataEmissao:yyyyMMdd}-{nota.IdentificacaoRps.Numero}.xml", nota.IdentificacaoRps.DataEmissao);
+
+                // Alteração DC_SYSTEM - Não faz mais sentido salvar, pois o DC System já está salvando
+                //GravarRpsEmDisco(xmlRps, $"Rps-{nota.IdentificacaoRps.DataEmissao:yyyyMMdd}-{nota.IdentificacaoRps.Numero}.xml", nota.IdentificacaoRps.DataEmissao);
             }
 
             var xmlLote = new StringBuilder();
@@ -658,7 +674,7 @@ namespace ACBr.Net.NFSe.Providers
 
             retornoWebservice.XmlEnvio = XmlSigning.AssinarXml(retornoWebservice.XmlEnvio, "EnviarLoteRpsEnvio", "LoteRps", Certificado);
 
-            GravarArquivoEmDisco(retornoWebservice.XmlEnvio, $"lote-{lote}-env.xml");
+            //GravarArquivoEmDisco(retornoWebservice.XmlEnvio, $"lote-{lote}-env.xml");
 
             // Verifica Schema
             ValidarSchema(retornoWebservice, "servico_enviar_lote_rps_envio_v03.xsd");
@@ -680,7 +696,7 @@ namespace ACBr.Net.NFSe.Providers
                 return retornoWebservice;
             }
 
-            GravarArquivoEmDisco(retornoWebservice.XmlRetorno, $"lote-{lote}-ret.xml");
+            //GravarArquivoEmDisco(retornoWebservice.XmlRetorno, $"lote-{lote}-ret.xml");
 
             // Analisa mensagem de retorno
             var xmlRet = XDocument.Parse(retornoWebservice.XmlRetorno);
@@ -727,7 +743,7 @@ namespace ACBr.Net.NFSe.Providers
 
             retornoWebservice.XmlEnvio = XmlSigning.AssinarXml(retornoWebservice.XmlEnvio, "ConsultarSituacaoLoteRpsEnvio", "", Certificado);
 
-            GravarArquivoEmDisco(retornoWebservice.XmlEnvio, $"ConsultarSituacao-{DateTime.Now:yyyyMMddssfff}-{protocolo}-env.xml");
+            //GravarArquivoEmDisco(retornoWebservice.XmlEnvio, $"ConsultarSituacao-{DateTime.Now:yyyyMMddssfff}-{protocolo}-env.xml");
 
             // Verifica Schema
             ValidarSchema(retornoWebservice, "servico_consultar_situacao_lote_rps_envio_v03.xsd");
@@ -748,7 +764,7 @@ namespace ACBr.Net.NFSe.Providers
                 retornoWebservice.Erros.Add(new Evento { Codigo = "0", Descricao = ex.Message });
                 return retornoWebservice;
             }
-            GravarArquivoEmDisco(retornoWebservice.XmlRetorno, $"ConsultarSituacao-{DateTime.Now:yyyyMMddssfff}-{lote}-ret.xml");
+            //GravarArquivoEmDisco(retornoWebservice.XmlRetorno, $"ConsultarSituacao-{DateTime.Now:yyyyMMddssfff}-{lote}-ret.xml");
 
             // Analisa mensagem de retorno
             var xmlRet = XDocument.Parse(retornoWebservice.XmlRetorno);
@@ -783,7 +799,7 @@ namespace ACBr.Net.NFSe.Providers
 
             retornoWebservice.XmlEnvio = XmlSigning.AssinarXml(retornoWebservice.XmlEnvio, "ConsultarLoteRpsEnvio", "", Certificado);
 
-            GravarArquivoEmDisco(retornoWebservice.XmlEnvio, $"ConsultarLote-{DateTime.Now:yyyyMMddssfff}-{protocolo}-env.xml");
+            //GravarArquivoEmDisco(retornoWebservice.XmlEnvio, $"ConsultarLote-{DateTime.Now:yyyyMMddssfff}-{protocolo}-env.xml");
 
             // Verifica Schema
             ValidarSchema(retornoWebservice, "servico_consultar_lote_rps_envio_v03.xsd");
@@ -804,7 +820,7 @@ namespace ACBr.Net.NFSe.Providers
                 retornoWebservice.Erros.Add(new Evento { Codigo = "0", Descricao = ex.Message });
                 return retornoWebservice;
             }
-            GravarArquivoEmDisco(retornoWebservice.XmlRetorno, $"ConsultarLote-{DateTime.Now:yyyyMMddssfff}-{lote}-ret.xml");
+            //GravarArquivoEmDisco(retornoWebservice.XmlRetorno, $"ConsultarLote-{DateTime.Now:yyyyMMddssfff}-{lote}-ret.xml");
 
             // Analisa mensagem de retorno
             var xmlRet = XDocument.Parse(retornoWebservice.XmlRetorno);
@@ -844,6 +860,89 @@ namespace ACBr.Net.NFSe.Providers
             return retornoWebservice;
         }
 
+        public override RetornoWebservice CancelaNFSeOld(string codigoCancelamento, string numeroNFSe, string motivo, NotaFiscalCollection notas)
+        {
+            var retornoWebservice = new RetornoWebservice();
+
+            if (string.IsNullOrWhiteSpace(numeroNFSe))
+            {
+                retornoWebservice.Erros.Add(new Evento { Codigo = "0", Descricao = "Número da NFSe não informado para cancelamento." });
+                return retornoWebservice;
+            }
+
+            // xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"
+            var loteBuilder = new StringBuilder();
+            loteBuilder.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            loteBuilder.Append("<CancelarNfseEnvio xmlns=\"http://www.ginfes.com.br/servico_cancelar_nfse_envio\" xmlns:tipos=\"http://www.ginfes.com.br/tipos\">");
+            loteBuilder.Append("<Prestador>");
+            loteBuilder.Append($"<tipos:Cnpj>{Configuracoes.PrestadorPadrao.CpfCnpj.ZeroFill(14)}</tipos:Cnpj>");
+            loteBuilder.Append($"<tipos:InscricaoMunicipal>{Configuracoes.PrestadorPadrao.InscricaoMunicipal}</tipos:InscricaoMunicipal>");
+            loteBuilder.Append("</Prestador>");
+            loteBuilder.Append($"<NumeroNfse>{numeroNFSe}</NumeroNfse>");
+            loteBuilder.Append("</CancelarNfseEnvio>");
+            retornoWebservice.XmlEnvio = loteBuilder.ToString();
+
+            if (Configuracoes.Geral.RetirarAcentos)
+            {
+                retornoWebservice.XmlEnvio = retornoWebservice.XmlEnvio.RemoveAccent();
+            }
+
+            retornoWebservice.XmlEnvio = XmlSigning.AssinarXml(retornoWebservice.XmlEnvio, "CancelarNfseEnvio", "", Certificado);
+            //GravarArquivoEmDisco(retornoWebservice.XmlEnvio, $"CanNFSe-{numeroNFSe}-env.xml");
+
+            // Verifica Schema
+            ValidarSchema(retornoWebservice, "servico_cancelar_nfse_envio_v03.xsd");
+            if (retornoWebservice.Erros.Any()) return retornoWebservice;
+
+            // Recebe mensagem de retorno
+            try
+            {
+                using (var cliente = GetCliente(TipoUrl.CancelaNFSe))
+                {
+                    retornoWebservice.XmlRetorno = cliente.CancelarNfse(GerarCabecalhoOld(), retornoWebservice.XmlEnvio);
+                }
+            }
+            catch (Exception ex)
+            {
+                retornoWebservice.Erros.Add(new Evento { Codigo = "0", Descricao = ex.Message });
+                return retornoWebservice;
+            }
+            //GravarArquivoEmDisco(retornoWebservice.XmlRetorno, $"CanNFSe-{numeroNFSe}-ret.xml");
+
+            // Analisa mensagem de retorno
+            var xmlRet = XDocument.Parse(retornoWebservice.XmlRetorno);
+            MensagemErro(retornoWebservice, xmlRet, "CancelarNfseResposta");
+            if (retornoWebservice.Erros.Any()) return retornoWebservice;
+
+            retornoWebservice.Sucesso = xmlRet.ElementAnyNs("CancelarNfseResposta")?.ElementAnyNs("Sucesso")?.GetValue<bool>() ?? false;
+
+            var confirmacaoCancelamento = xmlRet.ElementAnyNs("CancelarNfseResposta")?.ElementAnyNs("MensagemRetorno")?.ElementAnyNs("Mensagem");
+
+            if (retornoWebservice.Sucesso == false)
+            {
+                var codigoErro = xmlRet.ElementAnyNs("CancelarNfseResposta")?.ElementAnyNs("MensagemRetorno")?.ElementAnyNs("Codigo");
+                retornoWebservice.Erros.Add(new Evento { Codigo = codigoErro.Value, Descricao = confirmacaoCancelamento.Value });
+                return retornoWebservice;
+            }
+
+            retornoWebservice.DataLote = xmlRet.ElementAnyNs("CancelarNfseResposta")?.ElementAnyNs("DataHora")?.GetValue<DateTime>() ?? DateTime.MinValue;
+
+            // Se a nota fiscal cancelada existir na coleção de Notas Fiscais, atualiza seu status:
+            var nota = notas.FirstOrDefault(x => x.IdentificacaoNFSe.Numero.Trim() == numeroNFSe);
+            if (nota != null)
+            {
+                nota.Situacao = SituacaoNFSeRps.Cancelado;
+                nota.Cancelamento.Pedido.CodigoCancelamento = codigoCancelamento;
+                nota.Cancelamento.DataHora = xmlRet.ElementAnyNs("CancelarNfseResposta")?.ElementAnyNs("DataHora")?.GetValue<DateTime>() ?? DateTime.MinValue;
+                nota.Cancelamento.MotivoCancelamento = motivo;
+
+                // No caso do Ginfes, não retorna o XML da NotaFiscal Cancelada.
+                // Por este motivo, não grava o arquivo NFSe-{nota.IdentificacaoNFSe.Chave}-{nota.IdentificacaoNFSe.Numero}.xml
+            }
+
+            return retornoWebservice;
+        }
+
         public override RetornoWebservice CancelaNFSe(string codigoCancelamento, string numeroNFSe, string motivo, NotaFiscalCollection notas)
         {
             var retornoWebservice = new RetornoWebservice();
@@ -877,7 +976,7 @@ namespace ACBr.Net.NFSe.Providers
             }
 
             retornoWebservice.XmlEnvio = XmlSigning.AssinarXml(retornoWebservice.XmlEnvio, "Pedido", "", Certificado);
-            GravarArquivoEmDisco(retornoWebservice.XmlEnvio, $"CanNFSe-{numeroNFSe}-env.xml");
+            //GravarArquivoEmDisco(retornoWebservice.XmlEnvio, $"CanNFSe-{numeroNFSe}-env.xml");
 
             // Verifica Schema
             ValidarSchema(retornoWebservice, "servico_cancelar_nfse_envio_v03.xsd");
@@ -898,7 +997,7 @@ namespace ACBr.Net.NFSe.Providers
                 retornoWebservice.Erros.Add(new Evento { Codigo = "0", Descricao = ex.Message });
                 return retornoWebservice;
             }
-            GravarArquivoEmDisco(retornoWebservice.XmlRetorno, $"CanNFSe-{numeroNFSe}-ret.xml");
+            //GravarArquivoEmDisco(retornoWebservice.XmlRetorno, $"CanNFSe-{numeroNFSe}-ret.xml");
 
             // Analisa mensagem de retorno
             var xmlRet = XDocument.Parse(retornoWebservice.XmlRetorno);
@@ -963,7 +1062,7 @@ namespace ACBr.Net.NFSe.Providers
 
             retornoWebservice.XmlEnvio = XmlSigning.AssinarXml(retornoWebservice.XmlEnvio, "ConsultarNfseRpsEnvio", "", Certificado);
 
-            GravarArquivoEmDisco(retornoWebservice.XmlEnvio, $"ConNotaRps-{numero}-env.xml");
+            //GravarArquivoEmDisco(retornoWebservice.XmlEnvio, $"ConNotaRps-{numero}-env.xml");
 
             // Verifica Schema
             ValidarSchema(retornoWebservice, "servico_consultar_nfse_rps_envio_v03.xsd");
@@ -984,7 +1083,7 @@ namespace ACBr.Net.NFSe.Providers
                 retornoWebservice.Erros.Add(new Evento { Codigo = "0", Descricao = ex.Message });
                 return retornoWebservice;
             }
-            GravarArquivoEmDisco(retornoWebservice.XmlRetorno, $"ConNotaRps-{numero}-ret.xml");
+            //GravarArquivoEmDisco(retornoWebservice.XmlRetorno, $"ConNotaRps-{numero}-ret.xml");
 
             // Analisa mensagem de retorno
             var xmlRet = XDocument.Parse(retornoWebservice.XmlRetorno);
@@ -1057,7 +1156,7 @@ namespace ACBr.Net.NFSe.Providers
             }
 
             retornoWebservice.XmlEnvio = XmlSigning.AssinarXml(retornoWebservice.XmlEnvio, "ConsultarNfseEnvio", "", Certificado);
-            GravarArquivoEmDisco(retornoWebservice.XmlEnvio, $"ConNota-{DateTime.Now:yyyyMMddssfff}-{numeroNfse}-env.xml");
+            //GravarArquivoEmDisco(retornoWebservice.XmlEnvio, $"ConNota-{DateTime.Now:yyyyMMddssfff}-{numeroNfse}-env.xml");
 
             // Verifica Schema
             ValidarSchema(retornoWebservice, "servico_consultar_nfse_envio_v03.xsd");
@@ -1078,7 +1177,7 @@ namespace ACBr.Net.NFSe.Providers
                 retornoWebservice.Erros.Add(new Evento { Codigo = "0", Descricao = ex.Message });
                 return retornoWebservice;
             }
-            GravarArquivoEmDisco(retornoWebservice.XmlRetorno, $"ConNota-{DateTime.Now:yyyyMMddssfff}-{numeroNfse}-ret.xml");
+            //GravarArquivoEmDisco(retornoWebservice.XmlRetorno, $"ConNota-{DateTime.Now:yyyyMMddssfff}-{numeroNfse}-ret.xml");
 
             // Analisa mensagem de retorno
             var xmlRet = XDocument.Parse(retornoWebservice.XmlRetorno);
@@ -1244,8 +1343,10 @@ namespace ACBr.Net.NFSe.Providers
                 )
             {
                 valores.AddChild(AdicionarTag(TipoCampo.De2, "", "DescontoIncondicionado", ns, 1, 15, Ocorrencia.Obrigatoria, nota.Servico.Valores.DescontoIncondicionado));
-                valores.AddChild(AdicionarTag(TipoCampo.De2, "", "DescontoCondicionado", ns, 1, 15, Ocorrencia.Obrigatoria, nota.Servico.Valores.DescontoCondicionado));
             }
+
+            // Alteração DC_SYSTEM - No município de Araraquara/SP é permitido apenas o Desconto Condicional
+            valores.AddChild(AdicionarTag(TipoCampo.De2, "", "DescontoCondicionado", ns, 1, 15, Ocorrencia.Obrigatoria, nota.Servico.Valores.DescontoCondicionado));
 
             servico.AddChild(AdicionarTag(TipoCampo.Str, "", "ItemListaServico", ns, 1, 5, Ocorrencia.Obrigatoria, nota.Servico.ItemListaServico));
 
@@ -1334,6 +1435,16 @@ namespace ACBr.Net.NFSe.Providers
         private GinfesServiceClient GetCliente(TipoUrl tipo)
         {
             return new GinfesServiceClient(this, tipo);
+        }
+
+        private static string GerarCabecalhoOld()
+        {
+            var cabecalho = new StringBuilder();
+            cabecalho.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            cabecalho.Append("<ns2:cabecalho versao=\"2\" xmlns:ns2=\"http://www.ginfes.com.br/cabecalho_v03.xsd\">");
+            cabecalho.Append("<versaoDados>2</versaoDados>");
+            cabecalho.Append("</ns2:cabecalho>");
+            return cabecalho.ToString();
         }
 
         private static string GerarCabecalho()

@@ -31,9 +31,9 @@
 
 namespace ACBr.Net.NFSe.Nota
 {
-	public enum ResponsavelRetencao
-	{
-		Tomador,
-		Prestador
-	}
+    public enum ResponsavelRetencao
+    {
+        Tomador,
+        Prestador
+    }
 }

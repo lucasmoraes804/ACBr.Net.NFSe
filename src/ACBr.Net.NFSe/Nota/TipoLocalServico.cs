@@ -31,9 +31,9 @@
 
 namespace ACBr.Net.NFSe.Nota
 {
-	public enum TipoLocalServico
-	{
-		Tomador,
-		Prestador
-	}
+    public enum TipoLocalServico
+    {
+        Tomador,
+        Prestador
+    }
 }

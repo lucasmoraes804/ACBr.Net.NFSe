@@ -31,9 +31,9 @@
 
 namespace ACBr.Net.NFSe.Nota
 {
-	public enum TipoEmpreitadaGlobal
-	{
-		ConstrucaoCivil,
-		Outros
-	}
+    public enum TipoEmpreitadaGlobal
+    {
+        ConstrucaoCivil,
+        Outros
+    }
 }

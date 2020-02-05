@@ -29,8 +29,8 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.ComponentModel;
 using ACBr.Net.Core.Generics;
+using System.ComponentModel;
 
 namespace ACBr.Net.NFSe.Nota
 {
@@ -39,7 +39,6 @@ namespace ACBr.Net.NFSe.Nota
         #region Events
 
         public event PropertyChangedEventHandler PropertyChanged;
-        public int MyProperty { get; set; }
 
         #endregion Events
 

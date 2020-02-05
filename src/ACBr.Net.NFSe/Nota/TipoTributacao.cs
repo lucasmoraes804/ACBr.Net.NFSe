@@ -31,20 +31,20 @@
 
 namespace ACBr.Net.NFSe.Nota
 {
-	public enum TipoTributacao
-	{
-		Tributavel,
-		NaoTributavel,
-		Isenta,
-		ForaMun,
-		ForaMunIsento,
-		Imune,
-		ForaMunImune,
-		Suspensa,
-		ForaMunSuspensa,
-		ExpServicos,
-		DepositoEmJuizo,
-		NaoIncide,
-		TributavelFixo
-	}
+    public enum TipoTributacao
+    {
+        Tributavel,
+        NaoTributavel,
+        Isenta,
+        ForaMun,
+        ForaMunIsento,
+        Imune,
+        ForaMunImune,
+        Suspensa,
+        ForaMunSuspensa,
+        ExpServicos,
+        DepositoEmJuizo,
+        NaoIncide,
+        TributavelFixo
+    }
 }

@@ -29,12 +29,12 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.Core;
 using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.NFSe.Providers;
 using System;
 using System.ComponentModel;
 using System.Linq;
-using ACBr.Net.Core;
 
 namespace ACBr.Net.NFSe.Configuracao
 {

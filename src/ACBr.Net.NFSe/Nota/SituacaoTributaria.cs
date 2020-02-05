@@ -31,10 +31,10 @@
 
 namespace ACBr.Net.NFSe.Nota
 {
-	public enum SituacaoTributaria
-	{
-		Retencao,
-		Normal,
-		Substituicao
-	}
+    public enum SituacaoTributaria
+    {
+        Retencao,
+        Normal,
+        Substituicao
+    }
 }

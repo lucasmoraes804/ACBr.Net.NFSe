@@ -29,13 +29,6 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
-using System.Globalization;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Xml;
-using System.Xml.Linq;
 using ACBr.Net.Core;
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.DFe.Core;
@@ -43,6 +36,13 @@ using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Serializer;
 using ACBr.Net.NFSe.Configuracao;
 using ACBr.Net.NFSe.Nota;
+using System;
+using System.Globalization;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace ACBr.Net.NFSe.Providers
 {

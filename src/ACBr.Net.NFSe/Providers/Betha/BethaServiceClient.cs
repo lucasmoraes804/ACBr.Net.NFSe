@@ -29,11 +29,11 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.Core.Extensions;
+using ACBr.Net.DFe.Core;
 using System;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml.Linq;
-using ACBr.Net.Core.Extensions;
-using ACBr.Net.DFe.Core;
 
 namespace ACBr.Net.NFSe.Providers
 {

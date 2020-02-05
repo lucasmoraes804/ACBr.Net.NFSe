@@ -31,17 +31,17 @@
 
 namespace ACBr.Net.NFSe.Nota
 {
-	public enum RegimeEspecialTributacao
-	{
-		Nenhum,
-		MicroEmpresaMunicipal,
-		Estimativa,
-		SociedadeProfissionais,
-		Cooperativa,
-		MicroEmpresarioIndividual,
-		MicroEmpresarioEmpresaPP,
-		LucroReal,
-		LucroPresumido,
-		SimplesNacional
-	}
+    public enum RegimeEspecialTributacao
+    {
+        Nenhum,
+        MicroEmpresaMunicipal,
+        Estimativa,
+        SociedadeProfissionais,
+        Cooperativa,
+        MicroEmpresarioIndividual,
+        MicroEmpresarioEmpresaPP,
+        LucroReal,
+        LucroPresumido,
+        SimplesNacional
+    }
 }

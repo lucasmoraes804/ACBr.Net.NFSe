@@ -31,9 +31,9 @@
 
 namespace ACBr.Net.NFSe.Nota
 {
-	public enum NFSeSimNao
-	{
-		Sim,
-		Nao
-	}
+    public enum NFSeSimNao
+    {
+        Sim,
+        Nao
+    }
 }

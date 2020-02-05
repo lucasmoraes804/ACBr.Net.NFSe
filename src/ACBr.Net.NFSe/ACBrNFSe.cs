@@ -31,13 +31,14 @@
 
 using ACBr.Net.Core;
 using ACBr.Net.Core.Extensions;
+using ACBr.Net.Core.Logging;
 using ACBr.Net.NFSe.Configuracao;
 using ACBr.Net.NFSe.Nota;
 using ACBr.Net.NFSe.Providers;
 using System;
 using System.ComponentModel;
 using System.Net;
-using ACBr.Net.Core.Logging;
+using System.Security.Cryptography.X509Certificates;
 
 #if NETFULL
 
@@ -59,6 +60,8 @@ namespace ACBr.Net.NFSe
 
         private SecurityProtocolType protocolType;
         private ACBrDANFSeBase danfSe;
+
+        public string SubjectCertificate;
 
         #endregion Fields
 
@@ -314,6 +317,32 @@ namespace ACBr.Net.NFSe
             }
         }
 
+        public RetornoWebservice CancelaNFSeOld(string codigoCancelamento, string numeroNFSe, string motivo)
+        {
+            var oldProtocol = ServicePointManager.SecurityProtocol;
+
+            try
+            {
+                ServicePointManager.SecurityProtocol = protocolType;
+                using (var provider = ProviderManager.GetProvider(Configuracoes))
+                {
+                    if (this.SubjectCertificate != null)
+                        provider.certificado = CarregarCertificado(StoreLocation.CurrentUser, this.SubjectCertificate);
+
+                    return provider.CancelaNFSeOld(codigoCancelamento, numeroNFSe, motivo, NotasFiscais);
+                }
+            }
+            catch (Exception exception)
+            {
+                this.Log().Error("[CancelaNFSe]", exception);
+                throw;
+            }
+            finally
+            {
+                ServicePointManager.SecurityProtocol = oldProtocol;
+            }
+        }
+
         /// <summary>
         /// Cancela uma NFSe
         ///
@@ -454,6 +483,28 @@ namespace ACBr.Net.NFSe
         }
 
         #endregion Override Methods
+
+        #region Carregar Certificado
+        public X509Certificate2 CarregarCertificado(StoreLocation storeLocation, string certificateName)
+        {
+            X509Store store = new X509Store(storeLocation);
+            store.Open(OpenFlags.ReadOnly);
+            X509Certificate2Collection certCollection = store.Certificates;
+            X509Certificate2 x509 = null;
+            foreach (X509Certificate2 c in certCollection)
+            {
+                if (c.Subject == certificateName)
+                {
+                    x509 = c;
+                    break;
+                }
+            }
+            if (x509 == null)
+                Console.WriteLine("A x509 certificate for " + certificateName + " was not found");
+            store.Close();
+            return x509;
+        }
+        #endregion
 
         #endregion Methods
     }

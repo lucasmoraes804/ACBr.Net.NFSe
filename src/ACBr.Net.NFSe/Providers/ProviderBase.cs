@@ -29,10 +29,12 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.Core;
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.Core.Logging;
 using ACBr.Net.DFe.Core;
 using ACBr.Net.DFe.Core.Common;
+using ACBr.Net.DFe.Core.Document;
 using ACBr.Net.DFe.Core.Serializer;
 using ACBr.Net.NFSe.Configuracao;
 using ACBr.Net.NFSe.Nota;
@@ -44,8 +46,6 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Xml.Linq;
-using ACBr.Net.Core;
-using ACBr.Net.DFe.Core.Document;
 
 namespace ACBr.Net.NFSe.Providers
 {
@@ -74,7 +74,7 @@ namespace ACBr.Net.NFSe.Providers
 
         #region Fields
 
-        private X509Certificate2 certificado;
+        public X509Certificate2 certificado;
         private bool disposed;
 
         #endregion Fields
@@ -369,6 +369,11 @@ namespace ACBr.Net.NFSe.Providers
         }
 
         public virtual RetornoWebservice CancelaNFSe(int lote, NotaFiscalCollection notas)
+        {
+            throw new NotImplementedException("Função não implementada/suportada neste Provedor !");
+        }
+
+        public virtual RetornoWebservice CancelaNFSeOld(string codigoCancelamento, string numeroNFSe, string motivo, NotaFiscalCollection notas)
         {
             throw new NotImplementedException("Função não implementada/suportada neste Provedor !");
         }

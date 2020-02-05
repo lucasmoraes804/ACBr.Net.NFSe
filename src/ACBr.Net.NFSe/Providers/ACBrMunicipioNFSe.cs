@@ -29,10 +29,10 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.DFe.Core.Common;
 using System;
 using System.IO;
 using System.Runtime.Serialization;
-using ACBr.Net.DFe.Core.Common;
 
 namespace ACBr.Net.NFSe.Providers
 {

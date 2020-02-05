@@ -29,9 +29,9 @@
 // <summary></summary>
 // ***********************************************************************
 
+using ACBr.Net.Core.Extensions;
 using System.Text;
 using System.Xml.Linq;
-using ACBr.Net.Core.Extensions;
 
 namespace ACBr.Net.NFSe.Providers
 {

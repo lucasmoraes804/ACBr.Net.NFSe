@@ -29,9 +29,9 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System;
 using ACBr.Net.NFSe.Configuracao;
 using ACBr.Net.NFSe.Nota;
+using System;
 
 namespace ACBr.Net.NFSe.Providers
 {

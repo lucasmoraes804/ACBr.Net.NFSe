@@ -30,9 +30,9 @@
 // ***********************************************************************
 
 using ACBr.Net.Core.Generics;
+using ACBr.Net.DFe.Core.Document;
 using System;
 using System.ComponentModel;
-using ACBr.Net.DFe.Core.Document;
 
 namespace ACBr.Net.NFSe.Nota
 {

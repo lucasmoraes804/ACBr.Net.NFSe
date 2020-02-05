@@ -33,33 +33,33 @@ using ACBr.Net.NFSe.Nota;
 
 namespace ACBr.Net.NFSe.Providers
 {
-	public class Evento
-	{
-		#region Constructor
+    public class Evento
+    {
+        #region Constructor
 
-		/// <summary>
-		/// Initializes a new instance of the <see cref="Evento"/> class.
-		/// </summary>
-		public Evento()
-		{
-			IdentificacaoNfse = new IdeNFSe();
-			IdentificacaoRps = new IdeRps();
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Evento"/> class.
+        /// </summary>
+        public Evento()
+        {
+            IdentificacaoNfse = new IdeNFSe();
+            IdentificacaoRps = new IdeRps();
+        }
 
-		#endregion Constructor
+        #endregion Constructor
 
-		#region Propriedades
+        #region Propriedades
 
-		public string Codigo { get; set; }
+        public string Codigo { get; set; }
 
-		public string Descricao { get; set; }
+        public string Descricao { get; set; }
 
-		public string Correcao { get; set; }
+        public string Correcao { get; set; }
 
-		public IdeRps IdentificacaoRps { get; set; }
+        public IdeRps IdentificacaoRps { get; set; }
 
-		public IdeNFSe IdentificacaoNfse { get; set; }
+        public IdeNFSe IdentificacaoNfse { get; set; }
 
-		#endregion Propriedades
-	}
+        #endregion Propriedades
+    }
 }

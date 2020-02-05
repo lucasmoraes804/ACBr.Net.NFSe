@@ -29,15 +29,20 @@
 // <summary></summary>
 // ***********************************************************************
 
+
+/* Alteração não mesclada do projeto 'ACBr.Net.NFSe (netstandard2.0)'
+Antes:
 using System.IO;
-using System.Security.Cryptography.X509Certificates;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.Text;
-using System.Xml;
-using System.Xml.Linq;
+Após:
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.DFe.Core;
+using System.IO;
+*/
+using ACBr.Net.Core.Extensions;
+using ACBr.Net.DFe.Core;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using System.Xml.Linq;
 
 namespace ACBr.Net.NFSe.Providers
 {

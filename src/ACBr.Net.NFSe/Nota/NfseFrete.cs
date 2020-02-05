@@ -31,9 +31,9 @@
 
 namespace ACBr.Net.NFSe.Nota
 {
-	public enum NfseFrete
-	{
-		Prestador,
-		Tomador
-	}
+    public enum NfseFrete
+    {
+        Prestador,
+        Tomador
+    }
 }

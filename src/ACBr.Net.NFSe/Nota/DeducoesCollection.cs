@@ -29,8 +29,8 @@
 // <summary></summary>
 // ***********************************************************************
 
-using System.ComponentModel;
 using ACBr.Net.DFe.Core.Collection;
+using System.ComponentModel;
 
 namespace ACBr.Net.NFSe.Nota
 {

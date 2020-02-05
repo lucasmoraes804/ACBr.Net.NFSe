@@ -31,10 +31,10 @@
 
 namespace ACBr.Net.NFSe.Nota
 {
-	public enum TipoRps
-	{
-		RPS = 0,
-		NFConjugada = 1,
-		Cupom = 2
-	}
+    public enum TipoRps
+    {
+        RPS = 0,
+        NFConjugada = 1,
+        Cupom = 2
+    }
 }

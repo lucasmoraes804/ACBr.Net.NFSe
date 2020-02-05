@@ -31,12 +31,12 @@
 
 namespace ACBr.Net.NFSe.Nota
 {
-	public enum FormaPagamento
-	{
-		AVista,
-		NaApresentacao,
-		APrazo,
-		CartaoCredito,
-		CartaoDebito
-	}
+    public enum FormaPagamento
+    {
+        AVista,
+        NaApresentacao,
+        APrazo,
+        CartaoCredito,
+        CartaoDebito
+    }
 }

@@ -30,6 +30,7 @@
 // ***********************************************************************
 
 using ACBr.Net.Core;
+using ACBr.Net.Core.Extensions;
 using ACBr.Net.DFe.Core.Common;
 using ACBr.Net.DFe.Core.Serializer;
 using ACBr.Net.NFSe.Nota;
@@ -38,7 +39,6 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Text;
-using ACBr.Net.Core.Extensions;
 
 namespace ACBr.Net.NFSe
 {
