@@ -106,7 +106,6 @@ namespace ACBr.Net.NFSe
         /// <param name="imprimir">Se for informado <c>true</c> imprime as RPS, se o envio foi executado com sucesso.</param>
         /// <returns>RetornoWebservice.</returns>
         public RetornoWebservice Enviar(int lote, bool sincrono = false, bool imprimir = false)
-
         {
             Guard.Against<ACBrException>(NotasFiscais.Count < 1, "ERRO: Nenhuma RPS adicionada ao Lote");
 
@@ -121,6 +120,9 @@ namespace ACBr.Net.NFSe
                 ServicePointManager.SecurityProtocol = protocolType;
                 using (var provider = ProviderManager.GetProvider(Configuracoes))
                 {
+                    if (this.SubjectCertificate != null)
+                        provider.certificado = CarregarCertificado(StoreLocation.CurrentUser, this.SubjectCertificate);
+
                     var ret = sincrono
                         ? provider.EnviarSincrono(lote, NotasFiscais)
                         : provider.Enviar(lote, NotasFiscais);
@@ -161,6 +163,9 @@ namespace ACBr.Net.NFSe
                 ServicePointManager.SecurityProtocol = protocolType;
                 using (var provider = ProviderManager.GetProvider(Configuracoes))
                 {
+                    if (this.SubjectCertificate != null)
+                        provider.certificado = CarregarCertificado(StoreLocation.CurrentUser, this.SubjectCertificate);
+
                     return provider.ConsultarSituacao(lote, protocolo);
                 }
             }
@@ -193,6 +198,9 @@ namespace ACBr.Net.NFSe
                 ServicePointManager.SecurityProtocol = protocolType;
                 using (var provider = ProviderManager.GetProvider(Configuracoes))
                 {
+                    if (this.SubjectCertificate != null)
+                        provider.certificado = CarregarCertificado(StoreLocation.CurrentUser, this.SubjectCertificate);
+
                     return provider.ConsultarLoteRps(lote, protocolo, NotasFiscais);
                 }
             }
@@ -361,6 +369,9 @@ namespace ACBr.Net.NFSe
                 ServicePointManager.SecurityProtocol = protocolType;
                 using (var provider = ProviderManager.GetProvider(Configuracoes))
                 {
+                    if (this.SubjectCertificate != null)
+                        provider.certificado = CarregarCertificado(StoreLocation.CurrentUser, this.SubjectCertificate);
+
                     return provider.CancelaNFSe(codigoCancelamento, numeroNFSe, motivo, NotasFiscais);
                 }
             }

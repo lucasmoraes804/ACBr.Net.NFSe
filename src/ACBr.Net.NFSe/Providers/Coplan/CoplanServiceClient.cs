@@ -32,6 +32,7 @@
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.DFe.Core;
 using System.Net;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Xml.Linq;
 
@@ -46,6 +47,12 @@ namespace ACBr.Net.NFSe.Providers
         #endregion Fields
 
         #region Constructors
+
+        public CoplanServiceClient(ProviderCoplan provider, TipoUrl tipoUrl, X509Certificate2 certificado) : base(provider, tipoUrl, certificado)
+        {
+            expect100Continue = ServicePointManager.Expect100Continue;
+            ServicePointManager.Expect100Continue = false;
+        }
 
         public CoplanServiceClient(ProviderCoplan provider, TipoUrl tipoUrl) : base(provider, tipoUrl)
         {
