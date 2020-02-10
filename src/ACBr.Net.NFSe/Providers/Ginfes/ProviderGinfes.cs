@@ -653,7 +653,7 @@ namespace ACBr.Net.NFSe.Providers
             }
 
             var xmlLote = new StringBuilder();
-            xmlLote.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
+            xmlLote.Append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>");
             xmlLote.Append("<EnviarLoteRpsEnvio xmlns:tipos=\"http://www.ginfes.com.br/tipos_v03.xsd\" xmlns=\"http://www.ginfes.com.br/servico_enviar_lote_rps_envio_v03.xsd\">");
             xmlLote.Append($"<LoteRps Id=\"L{lote}\">");
             xmlLote.Append($"<tipos:NumeroLote>{lote}</tipos:NumeroLote>");
@@ -1346,7 +1346,8 @@ namespace ACBr.Net.NFSe.Providers
             }
 
             // Alteração DC_SYSTEM - No município de Araraquara/SP é permitido apenas o Desconto Condicional
-            valores.AddChild(AdicionarTag(TipoCampo.De2, "", "DescontoCondicionado", ns, 1, 15, Ocorrencia.Obrigatoria, nota.Servico.Valores.DescontoCondicionado));
+            if (nota.Servico.Valores.DescontoCondicionado > Decimal.Zero)
+                valores.AddChild(AdicionarTag(TipoCampo.De2, "", "DescontoCondicionado", ns, 1, 15, Ocorrencia.Obrigatoria, nota.Servico.Valores.DescontoCondicionado));
 
             servico.AddChild(AdicionarTag(TipoCampo.Str, "", "ItemListaServico", ns, 1, 5, Ocorrencia.Obrigatoria, nota.Servico.ItemListaServico));
 

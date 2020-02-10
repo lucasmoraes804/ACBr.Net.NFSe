@@ -31,6 +31,7 @@
 
 using ACBr.Net.Core.Extensions;
 using ACBr.Net.DFe.Core.Common;
+using System.Net;
 using System.Text;
 using System.Xml.Linq;
 
@@ -128,9 +129,11 @@ namespace ACBr.Net.NFSe.Providers
             var message = new StringBuilder();
             message.Append("<gin:RecepcionarLoteRpsV3>");
             message.Append("<arg0>");
+            //message.AppendCData(WebUtility.HtmlEncode(cabecalho));
             message.AppendCData(cabecalho);
             message.Append("</arg0>");
             message.Append("<arg1>");
+            //message.AppendCData(WebUtility.HtmlEncode(dados));
             message.AppendCData(dados);
             message.Append("</arg1>");
             message.Append("</gin:RecepcionarLoteRpsV3>");
