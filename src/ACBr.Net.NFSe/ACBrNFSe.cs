@@ -61,7 +61,10 @@ namespace ACBr.Net.NFSe
         private SecurityProtocolType protocolType;
         private ACBrDANFSeBase danfSe;
 
-        public string SubjectCertificate;
+        /// <summary>
+        /// Certificado para ser utilizado no momento da emissao e etc...
+        /// </summary>
+        public X509Certificate2 Certificate { get; set; }
 
         #endregion Fields
 
@@ -118,20 +121,19 @@ namespace ACBr.Net.NFSe
             try
             {
                 ServicePointManager.SecurityProtocol = protocolType;
-                using (var provider = ProviderManager.GetProvider(Configuracoes))
-                {
-                    if (this.SubjectCertificate != null)
-                        provider.certificado = CarregarCertificado(StoreLocation.CurrentUser, this.SubjectCertificate);
+                var provider = ProviderManager.GetProvider(Configuracoes);
 
-                    var ret = sincrono
-                        ? provider.EnviarSincrono(lote, NotasFiscais)
-                        : provider.Enviar(lote, NotasFiscais);
+                if (this.Certificate != null)
+                    provider.certificado = this.Certificate;
 
-                    if (ret.Sucesso && DANFSe != null && imprimir)
-                        DANFSe.Imprimir();
+                var ret = sincrono
+                    ? provider.EnviarSincrono(lote, NotasFiscais)
+                    : provider.Enviar(lote, NotasFiscais);
 
-                    return ret;
-                }
+                if (ret.Sucesso && DANFSe != null && imprimir)
+                    DANFSe.Imprimir();
+
+                return ret;
             }
             catch (Exception exception)
             {
@@ -161,13 +163,12 @@ namespace ACBr.Net.NFSe
             try
             {
                 ServicePointManager.SecurityProtocol = protocolType;
-                using (var provider = ProviderManager.GetProvider(Configuracoes))
-                {
-                    if (this.SubjectCertificate != null)
-                        provider.certificado = CarregarCertificado(StoreLocation.CurrentUser, this.SubjectCertificate);
+                var provider = ProviderManager.GetProvider(Configuracoes);
 
-                    return provider.ConsultarSituacao(lote, protocolo);
-                }
+                if (this.Certificate != null)
+                    provider.certificado = this.Certificate;
+
+                return provider.ConsultarSituacao(lote, protocolo);
             }
             catch (Exception exception)
             {
@@ -196,13 +197,12 @@ namespace ACBr.Net.NFSe
             try
             {
                 ServicePointManager.SecurityProtocol = protocolType;
-                using (var provider = ProviderManager.GetProvider(Configuracoes))
-                {
-                    if (this.SubjectCertificate != null)
-                        provider.certificado = CarregarCertificado(StoreLocation.CurrentUser, this.SubjectCertificate);
+                var provider = ProviderManager.GetProvider(Configuracoes);
 
-                    return provider.ConsultarLoteRps(lote, protocolo, NotasFiscais);
-                }
+                if (this.Certificate != null)
+                    provider.certificado = this.Certificate;
+
+                return provider.ConsultarLoteRps(lote, protocolo, NotasFiscais);
             }
             catch (Exception exception)
             {
@@ -334,8 +334,11 @@ namespace ACBr.Net.NFSe
                 ServicePointManager.SecurityProtocol = protocolType;
                 using (var provider = ProviderManager.GetProvider(Configuracoes))
                 {
-                    if (this.SubjectCertificate != null)
-                        provider.certificado = CarregarCertificado(StoreLocation.CurrentUser, this.SubjectCertificate);
+                    //if (this.SubjectCertificate != null)
+                    //    provider.certificado = CarregarCertificado(StoreLocation.CurrentUser, this.SubjectCertificate);
+
+                    if (this.Certificate != null)
+                        provider.certificado = this.Certificate;
 
                     return provider.CancelaNFSeOld(codigoCancelamento, numeroNFSe, motivo, NotasFiscais);
                 }
@@ -369,8 +372,11 @@ namespace ACBr.Net.NFSe
                 ServicePointManager.SecurityProtocol = protocolType;
                 using (var provider = ProviderManager.GetProvider(Configuracoes))
                 {
-                    if (this.SubjectCertificate != null)
-                        provider.certificado = CarregarCertificado(StoreLocation.CurrentUser, this.SubjectCertificate);
+                    //if (this.SubjectCertificate != null)
+                    //    provider.certificado = CarregarCertificado(StoreLocation.CurrentUser, this.SubjectCertificate);
+
+                    if (this.Certificate != null)
+                        provider.certificado = this.Certificate;
 
                     return provider.CancelaNFSe(codigoCancelamento, numeroNFSe, motivo, NotasFiscais);
                 }
